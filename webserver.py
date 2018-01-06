@@ -1,6 +1,5 @@
 import hug
 import json
-import linecache
 import logging
 from http import server
 
@@ -31,7 +30,7 @@ def render_error(code: hug.types.number = 500):
 def get_voters(amount: hug.types.number = 20):
     try:
         voters = sorted(json.loads(
-            linecache.getline("/root/workspace/Chaos/server/voters.json", 1)).items(),
+            open("/root/workspace/Chaos/server/voters.json")).items(),
             key=lambda x: x[1], reverse=True)
         if amount > 0:
             voters = voters[:amount]
@@ -44,7 +43,7 @@ def get_voters(amount: hug.types.number = 20):
 def get_meritocracy(amount: hug.types.number = 20):
     try:
         meritocracy = json.loads(
-            linecache.getline("/root/workspace/Chaos/server/meritocracy.json", 1))
+            open("/root/workspace/Chaos/server/meritocracy.json"))
         if amount > 0:
             meritocracy = meritocracy[:amount]
         return meritocracy
