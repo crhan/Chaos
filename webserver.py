@@ -29,7 +29,7 @@ def render_error(code: hug.types.number = 500):
 @hug.get("/api/voters", examples=["amount=20", "amount=0"])
 def get_voters(amount: hug.types.number = 20):
     try:
-        voters = sorted(json.loads(
+        voters = sorted(json.load(
             open("/root/workspace/Chaos/server/voters.json")).items(),
             key=lambda x: x[1], reverse=True)
         if amount > 0:
@@ -42,7 +42,7 @@ def get_voters(amount: hug.types.number = 20):
 @hug.get("/api/meritocracy", examples=["amount=5", "amount=0"])
 def get_meritocracy(amount: hug.types.number = 20):
     try:
-        meritocracy = json.loads(
+        meritocracy = json.load(
             open("/root/workspace/Chaos/server/meritocracy.json"))
         if amount > 0:
             meritocracy = meritocracy[:amount]
